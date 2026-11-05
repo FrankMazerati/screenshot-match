@@ -10,7 +10,7 @@ function hrefOf(item: NavItem) {
   return item.to ?? `/m/${item.id}`;
 }
 
-function NavLink({ item, collapsed, onNavigate, depth = 0 }: { item: NavItem; collapsed: boolean; onNavigate?: () => void; depth?: number }) {
+function NavLink({ item, collapsed, onNavigate, depth = 0 }: { item: NavItem; collapsed: boolean; onNavigate?: (() => void) | undefined; depth?: number }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const active = path === hrefOf(item);
   const cls = cn(
@@ -32,7 +32,7 @@ function NavLink({ item, collapsed, onNavigate, depth = 0 }: { item: NavItem; co
 }
 
 /** Expandable, collapsible, drag-reorderable navigation tree. */
-export function NavMenu({ collapsed = false, onNavigate }: { collapsed?: boolean; onNavigate?: () => void }) {
+export function NavMenu({ collapsed = false, onNavigate }: { collapsed?: boolean; onNavigate?: (() => void) | undefined }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [order, setOrder] = useState<string[]>(NAV.map((n) => n.id));
   const [open, setOpen] = useState<Record<string, boolean>>({});
