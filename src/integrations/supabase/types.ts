@@ -14,7 +14,136 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      sync_audit: {
+        Row: {
+          action: string
+          actor_id: string | null
+          connection_id: string | null
+          created_at: string
+          detail: Json
+          event_id: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          connection_id?: string | null
+          created_at?: string
+          detail?: Json
+          event_id?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          connection_id?: string | null
+          created_at?: string
+          detail?: Json
+          event_id?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_audit_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "sync_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sync_connections: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          last_error: string | null
+          last_sync_at: string | null
+          name: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id: string
+          last_error?: string | null
+          last_sync_at?: string | null
+          name: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          last_error?: string | null
+          last_sync_at?: string | null
+          name?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      sync_events: {
+        Row: {
+          actor_id: string | null
+          attempts: number
+          connection_id: string
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          event_type: string
+          id: string
+          last_error: string | null
+          max_attempts: number
+          next_attempt_at: string
+          payload: Json
+          processed_at: string | null
+          status: string
+        }
+        Insert: {
+          actor_id?: string | null
+          attempts?: number
+          connection_id: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          event_type: string
+          id?: string
+          last_error?: string | null
+          max_attempts?: number
+          next_attempt_at?: string
+          payload?: Json
+          processed_at?: string | null
+          status?: string
+        }
+        Update: {
+          actor_id?: string | null
+          attempts?: number
+          connection_id?: string
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          event_type?: string
+          id?: string
+          last_error?: string | null
+          max_attempts?: number
+          next_attempt_at?: string
+          payload?: Json
+          processed_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sync_events_connection_id_fkey"
+            columns: ["connection_id"]
+            isOneToOne: false
+            referencedRelation: "sync_connections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
