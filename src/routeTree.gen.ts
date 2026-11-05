@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as IntellideskRouteImport } from './routes/intellidesk'
+import { Route as IntellisyncRouteImport } from './routes/intellisync'
 import { Route as MSlugRouteImport } from './routes/m.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const IntellideskRoute = IntellideskRouteImport.update({
   path: '/intellidesk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntellisyncRoute = IntellisyncRouteImport.update({
+  id: '/intellisync',
+  path: '/intellisync',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MSlugRoute = MSlugRouteImport.update({
   id: '/m/$slug',
   path: '/m/$slug',
@@ -32,30 +38,34 @@ const MSlugRoute = MSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/intellidesk': typeof IntellideskRoute
+  '/intellisync': typeof IntellisyncRoute
   '/m/$slug': typeof MSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/intellidesk': typeof IntellideskRoute
+  '/intellisync': typeof IntellisyncRoute
   '/m/$slug': typeof MSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/intellidesk': typeof IntellideskRoute
+  '/intellisync': typeof IntellisyncRoute
   '/m/$slug': typeof MSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/intellidesk' | '/m/$slug'
+  fullPaths: '/' | '/intellidesk' | '/intellisync' | '/m/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/intellidesk' | '/m/$slug'
-  id: '__root__' | '/' | '/intellidesk' | '/m/$slug'
+  to: '/' | '/intellidesk' | '/intellisync' | '/m/$slug'
+  id: '__root__' | '/' | '/intellidesk' | '/intellisync' | '/m/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   IntellideskRoute: typeof IntellideskRoute
+  IntellisyncRoute: typeof IntellisyncRoute
   MSlugRoute: typeof MSlugRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntellideskRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/intellisync': {
+      id: '/intellisync'
+      path: '/intellisync'
+      fullPath: '/intellisync'
+      preLoaderRoute: typeof IntellisyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/m/$slug': {
       id: '/m/$slug'
       path: '/m/$slug'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   IntellideskRoute: IntellideskRoute,
+  IntellisyncRoute: IntellisyncRoute,
   MSlugRoute: MSlugRoute,
 }
 export const routeTree = rootRouteImport
