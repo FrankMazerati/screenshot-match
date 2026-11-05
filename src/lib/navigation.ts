@@ -13,7 +13,7 @@ export type NavItem = {
   id: string;
   title: string;
   icon: LucideIcon;
-  to?: "/" | "/intellidesk";
+  to?: "/" | "/intellidesk" | "/intellisync";
   children?: NavItem[];
 };
 
@@ -26,7 +26,7 @@ export const NAV: NavItem[] = [
   {
     id: "intellisync-group", title: "IntelliSync", icon: RefreshCw,
     children: [
-      { id: "intellisync", title: "IntelliSync Engine", icon: RefreshCw },
+      { id: "intellisync", title: "IntelliSync Engine", icon: RefreshCw, to: "/intellisync" },
       { id: "mysync", title: "MySync", icon: UserCog },
       { id: "company-sync", title: "Company Sync", icon: Building2 },
       { id: "central-authorization", title: "Central Authorization", icon: KeyRound },
