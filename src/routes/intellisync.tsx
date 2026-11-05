@@ -28,12 +28,12 @@ function IntelliSyncPage() {
     <div className="mx-auto flex max-w-7xl flex-col gap-5">
       <ModuleHeader icon={RefreshCw} title="IntelliSync" subtitle="Core synchronization & coordination engine" />
       <div className="grid gap-4 md:grid-cols-4">
-        {[
+        {([
           ["IntelliSync", "Events, retries, reconciliation, health"],
           ["MySync", "Employee view of their connected services"],
           ["Company Sync", "Admin management of all connections"],
           ["Central Authorization", "Decides who can trigger what"],
-        ].map(([t, d]) => (
+        ] as const).map(([t, d]) => (
           <GlassCard key={t} title={t} icon={Layers}><p className="text-xs text-muted-foreground">{d}</p></GlassCard>
         ))}
       </div>
